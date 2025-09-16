@@ -1,0 +1,6 @@
+New Node Setup:
+  1. ./init-ipfs.sh → Basic IPFS node (public)
+  2. ./configure-private-cluster.sh → Private cluster node
+
+Existing Node:
+  • Just run ./configure-private-cluster.sh to make it private
