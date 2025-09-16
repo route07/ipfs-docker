@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  ipfs:
+    image: ipfs/go-ipfs:latest
+    container_name: ipfs-node
+    ports:
+      - "4001:4001"     # IPFS swarm port
+      - "5001:5001"     # IPFS API port
+      - "8080:8080"     # IPFS Gateway port
+    volumes:
+      - ./ipfs-data:/data/ipfs
+      - ./ipfs-config:/root/.ipfs
+    environment:
+      - IPFS_PROFILE=server
+    command: daemon --migrate=true --agent-version-suffix=docker
+    restart: unless-stopped
+    networks:
+      - ipfs-network
+
+networks:
+  ipfs-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
